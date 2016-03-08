@@ -24,7 +24,21 @@ namespace ProjektSimulation.Model
             AktuelleAufgabe = Beschaeftigung.Lernen;
         }
 
-        public async Task Planen(Projekt projekt)
+        public async Task Arbeiten(IEnumerable<Projekt> projekte)
+        {
+            foreach (Projekt projekt in projekte)
+            {
+                if (!projekt.IstInBearbeitung)
+                {
+                    projekt.IstInBearbeitung = true;
+                    await Planen(projekt);
+                    await Entwickeln(projekt);
+                    projekt.IstInBearbeitung = false;
+                }
+            }
+        }
+
+        private async Task Planen(Projekt projekt)
         {
             if ((projekt.Status == ProjektStatus.Definition) 
                 || (projekt.Status == ProjektStatus.Test))
@@ -36,7 +50,7 @@ namespace ProjektSimulation.Model
             }
         }
 
-        public async Task Entwickeln(Projekt projekt)
+        private async Task Entwickeln(Projekt projekt)
         {
             if (projekt.Status == ProjektStatus.Planung)
             {

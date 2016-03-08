@@ -33,5 +33,13 @@ namespace ProjektSimulation
             this.gridProjekte.BestFitColumns();
             this.gridProjekte.DataSource = aktuelleProjekte;
         }
+
+        private async void btnStart_Click(object sender, EventArgs e)
+        {
+            foreach (Entwickler entwickler in aktuellesTeam)
+            {
+                await entwickler.Arbeiten(aktuelleProjekte);
+            }
+        }
     }
 }

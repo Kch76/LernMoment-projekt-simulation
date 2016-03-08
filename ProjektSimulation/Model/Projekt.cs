@@ -19,6 +19,7 @@ namespace ProjektSimulation.Model
     {
         public string Name { get; }
         public ProjektStatus Status { get; set; }
+        public bool IstInBearbeitung { get; set; }
 
         public Projekt(string name)
         {

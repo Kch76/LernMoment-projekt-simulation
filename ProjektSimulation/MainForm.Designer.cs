@@ -35,6 +35,7 @@
             this.gridEntwickler = new Telerik.WinControls.UI.RadGridView();
             this.tabProjekte = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridProjekte = new Telerik.WinControls.UI.RadGridView();
+            this.btnStart = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabEntwickler.SuspendLayout();
@@ -43,6 +44,7 @@
             this.tabProjekte.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,11 +52,10 @@
             // 
             this.tabControl.Controls.Add(this.tabEntwickler);
             this.tabControl.Controls.Add(this.tabProjekte);
-            this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl.Location = new System.Drawing.Point(0, 0);
+            this.tabControl.Location = new System.Drawing.Point(0, 44);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedPage = this.tabProjekte;
-            this.tabControl.Size = new System.Drawing.Size(826, 420);
+            this.tabControl.Size = new System.Drawing.Size(826, 376);
             this.tabControl.TabIndex = 0;
             this.tabControl.Text = "tabControl";
             ((Telerik.WinControls.UI.RadPageViewStripElement)(this.tabControl.GetChildAt(0))).ShowItemCloseButton = false;
@@ -87,7 +88,7 @@
             this.tabProjekte.ItemSize = new System.Drawing.SizeF(57F, 28F);
             this.tabProjekte.Location = new System.Drawing.Point(10, 37);
             this.tabProjekte.Name = "tabProjekte";
-            this.tabProjekte.Size = new System.Drawing.Size(805, 372);
+            this.tabProjekte.Size = new System.Drawing.Size(805, 328);
             this.tabProjekte.Text = "Projekte";
             // 
             // gridProjekte
@@ -99,15 +100,25 @@
             // 
             this.gridProjekte.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.gridProjekte.Name = "gridProjekte";
-            this.gridProjekte.Size = new System.Drawing.Size(805, 372);
+            this.gridProjekte.Size = new System.Drawing.Size(805, 328);
             this.gridProjekte.TabIndex = 0;
             this.gridProjekte.Text = "radGridView2";
+            // 
+            // btnStart
+            // 
+            this.btnStart.Location = new System.Drawing.Point(13, 13);
+            this.btnStart.Name = "btnStart";
+            this.btnStart.Size = new System.Drawing.Size(110, 24);
+            this.btnStart.TabIndex = 1;
+            this.btnStart.Text = "Start";
+            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 420);
+            this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tabControl);
             this.Name = "MainForm";
             // 
@@ -123,6 +134,7 @@
             this.tabProjekte.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -135,5 +147,6 @@
         private Telerik.WinControls.UI.RadGridView gridEntwickler;
         private Telerik.WinControls.UI.RadPageViewPage tabProjekte;
         private Telerik.WinControls.UI.RadGridView gridProjekte;
+        private Telerik.WinControls.UI.RadButton btnStart;
     }
 }
