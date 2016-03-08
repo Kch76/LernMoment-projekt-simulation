@@ -28,19 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition3 = new Telerik.WinControls.UI.TableViewDefinition();
-            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition4 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition1 = new Telerik.WinControls.UI.TableViewDefinition();
+            Telerik.WinControls.UI.TableViewDefinition tableViewDefinition2 = new Telerik.WinControls.UI.TableViewDefinition();
             this.tabControl = new Telerik.WinControls.UI.RadPageView();
             this.tabEntwickler = new Telerik.WinControls.UI.RadPageViewPage();
-            this.tabProjekte = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridEntwickler = new Telerik.WinControls.UI.RadGridView();
+            this.tabProjekte = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridProjekte = new Telerik.WinControls.UI.RadGridView();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabEntwickler.SuspendLayout();
-            this.tabProjekte.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridEntwickler)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEntwickler.MasterTemplate)).BeginInit();
+            this.tabProjekte.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -57,6 +57,7 @@
             this.tabControl.Size = new System.Drawing.Size(826, 420);
             this.tabControl.TabIndex = 0;
             this.tabControl.Text = "tabControl";
+            ((Telerik.WinControls.UI.RadPageViewStripElement)(this.tabControl.GetChildAt(0))).ShowItemCloseButton = false;
             // 
             // tabEntwickler
             // 
@@ -67,6 +68,19 @@
             this.tabEntwickler.Size = new System.Drawing.Size(805, 372);
             this.tabEntwickler.Text = "Entwickler";
             // 
+            // gridEntwickler
+            // 
+            this.gridEntwickler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridEntwickler.Location = new System.Drawing.Point(0, 0);
+            // 
+            // 
+            // 
+            this.gridEntwickler.MasterTemplate.ViewDefinition = tableViewDefinition1;
+            this.gridEntwickler.Name = "gridEntwickler";
+            this.gridEntwickler.Size = new System.Drawing.Size(805, 372);
+            this.gridEntwickler.TabIndex = 0;
+            this.gridEntwickler.Text = "radGridView1";
+            // 
             // tabProjekte
             // 
             this.tabProjekte.Controls.Add(this.gridProjekte);
@@ -76,19 +90,6 @@
             this.tabProjekte.Size = new System.Drawing.Size(805, 372);
             this.tabProjekte.Text = "Projekte";
             // 
-            // gridEntwickler
-            // 
-            this.gridEntwickler.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridEntwickler.Location = new System.Drawing.Point(0, 0);
-            // 
-            // 
-            // 
-            this.gridEntwickler.MasterTemplate.ViewDefinition = tableViewDefinition3;
-            this.gridEntwickler.Name = "gridEntwickler";
-            this.gridEntwickler.Size = new System.Drawing.Size(805, 372);
-            this.gridEntwickler.TabIndex = 0;
-            this.gridEntwickler.Text = "radGridView1";
-            // 
             // gridProjekte
             // 
             this.gridProjekte.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -96,7 +97,7 @@
             // 
             // 
             // 
-            this.gridProjekte.MasterTemplate.ViewDefinition = tableViewDefinition4;
+            this.gridProjekte.MasterTemplate.ViewDefinition = tableViewDefinition2;
             this.gridProjekte.Name = "gridProjekte";
             this.gridProjekte.Size = new System.Drawing.Size(805, 372);
             this.gridProjekte.TabIndex = 0;
@@ -117,9 +118,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.tabEntwickler.ResumeLayout(false);
-            this.tabProjekte.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridEntwickler.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridEntwickler)).EndInit();
+            this.tabProjekte.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
