@@ -66,6 +66,7 @@ namespace ProjektSimulation.Model
                 // Eigentlich kann der Entwickler gar nicht planen ;-)
                 await Task.Delay(TimeSpan.FromSeconds(5));
 
+                SiAuto.Main.LogObject("Entwickler " + Name + " hat das folgende Projekt geplant", projekt);
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
@@ -84,6 +85,7 @@ namespace ProjektSimulation.Model
 
                 await Task.Delay(TimeSpan.FromSeconds(15));
 
+                SiAuto.Main.LogObject("Entwickler " + Name + " hat das folgende Projekt entwickelt", projekt);
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
