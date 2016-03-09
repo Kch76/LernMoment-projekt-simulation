@@ -1,4 +1,5 @@
-﻿using ProjektSimulation.Model;
+﻿using Gurock.SmartInspect;
+using ProjektSimulation.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,11 +38,14 @@ namespace ProjektSimulation
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
+            SiAuto.Main.EnterMethod(this, "btnStart_Click");
             foreach (Entwickler entwickler in aktuellesTeam)
             {
+                SiAuto.Main.LogMessage("Schicke Entwickler: {0} an die Arbeit!", entwickler.Name);
                 entwickler.Arbeiten(aktuelleProjekte);
                 await Task.Delay(TimeSpan.FromSeconds(10));
             }
+            SiAuto.Main.LeaveMethod(this, "btnStart_Click");
         }
     }
 }

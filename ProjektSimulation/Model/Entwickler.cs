@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gurock.SmartInspect;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -53,26 +54,40 @@ namespace ProjektSimulation.Model
 
         private async Task Planen(Projekt projekt)
         {
+            SiAuto.Main.EnterThread("Entwickler.Planen-Task");
+
             if ((projekt.Status == ProjektStatus.Definition) 
                 || (projekt.Status == ProjektStatus.Test))
             {
                 projekt.Status = ProjektStatus.Planung;
                 projekt.ZuletztAktiverEntwickler = Name;
                 AktuelleAufgabe = Beschaeftigung.Planen;
+
+                // Eigentlich kann der Entwickler gar nicht planen ;-)
                 await Task.Delay(TimeSpan.FromSeconds(5));
+
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
+
+            SiAuto.Main.LeaveThread("Entwickler.Planen-Task");
         }
 
         private async Task Entwickeln(Projekt projekt)
         {
+            SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
+
             if (projekt.Status == ProjektStatus.Planung)
             {
                 projekt.Status = ProjektStatus.Entwicklung;
                 AktuelleAufgabe = Beschaeftigung.Entwickeln;
+                projekt.ZuletztAktiverEntwickler = Name;
+
                 await Task.Delay(TimeSpan.FromSeconds(15));
+
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
+
+            SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
         }
     }
 }

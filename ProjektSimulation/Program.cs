@@ -1,5 +1,5 @@
-﻿using System;
-using System.Linq;
+﻿using Gurock.SmartInspect;
+using System;
 using System.Windows.Forms;
 
 namespace ProjektSimulation
@@ -12,9 +12,12 @@ namespace ProjektSimulation
         [STAThread]
         static void Main()
         {
+            SiAuto.Si.Enabled = true;
+            SiAuto.Main.EnterProcess("ProjektSimulation");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
+            SiAuto.Main.LeaveProcess("ProjektSimulation");
         }
     }
 }
