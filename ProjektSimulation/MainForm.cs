@@ -38,6 +38,7 @@ namespace ProjektSimulation
 
         private async void btnStart_Click(object sender, EventArgs e)
         {
+            //SiAuto.Main.EnterThread("btnStart_Click");
             SiAuto.Main.EnterMethod(this, "btnStart_Click");
             foreach (Entwickler entwickler in aktuellesTeam)
             {
@@ -46,6 +47,7 @@ namespace ProjektSimulation
                 await Task.Delay(TimeSpan.FromSeconds(10));
             }
             SiAuto.Main.LeaveMethod(this, "btnStart_Click");
+            //SiAuto.Main.LeaveThread("btnStart_Click");
         }
     }
 }

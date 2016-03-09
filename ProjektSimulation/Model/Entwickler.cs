@@ -32,29 +32,50 @@ namespace ProjektSimulation.Model
             }
         }
 
-        public Entwickler(string name)
+        private bool istErschoepft;
+        public bool IstErschoepft
         {
-            Name = name;
-            AktuelleAufgabe = Beschaeftigung.Lernen;
-        }
-
-        public async Task Arbeiten(IEnumerable<Projekt> projekte)
-        {
-            foreach (Projekt projekt in projekte)
+            get { return istErschoepft; }
+            set
             {
-                if (!projekt.IstInBearbeitung)
+                if (value != istErschoepft)
                 {
-                    projekt.IstInBearbeitung = true;
-                    await Planen(projekt);
-                    await Entwickeln(projekt);
-                    projekt.IstInBearbeitung = false;
+                    istErschoepft = value;
+                    RaisePropertyChanged("IstErschoepft");
                 }
             }
         }
 
+        public Entwickler(string name)
+        {
+            Name = name;
+            AktuelleAufgabe = Beschaeftigung.Lernen;
+            IstErschoepft = false;
+        }
+
+        public async Task Arbeiten(IEnumerable<Projekt> projekte)
+        {
+            SiAuto.Main.EnterThread("Entwickler.Arbeiten-Task");
+            while (!IstErschoepft)
+            {
+                foreach (Projekt projekt in projekte)
+                {
+                    if (!projekt.IstInBearbeitung)
+                    {
+                        projekt.IstInBearbeitung = true;
+                        await Planen(projekt);
+                        await Entwickeln(projekt);
+                        projekt.IstInBearbeitung = false;
+                    }
+                }
+            }
+            SiAuto.Main.LeaveThread("Entwickler.Arbeiten-Task");
+        }
+
         private async Task Planen(Projekt projekt)
         {
-            SiAuto.Main.EnterThread("Entwickler.Planen-Task");
+            //SiAuto.Main.EnterThread("Entwickler.Planen-Task");
+            SiAuto.Main.EnterMethod(this, "Planen");
 
             if ((projekt.Status == ProjektStatus.Definition) 
                 || (projekt.Status == ProjektStatus.Test))
@@ -70,12 +91,14 @@ namespace ProjektSimulation.Model
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
-            SiAuto.Main.LeaveThread("Entwickler.Planen-Task");
+            SiAuto.Main.LeaveMethod(this, "Planen");
+            //SiAuto.Main.LeaveThread("Entwickler.Planen-Task");
         }
 
         private async Task Entwickeln(Projekt projekt)
         {
-            SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
+            //SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
+            SiAuto.Main.EnterMethod(this, "Entwickeln");
 
             if (projekt.Status == ProjektStatus.Planung)
             {
@@ -89,7 +112,8 @@ namespace ProjektSimulation.Model
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
-            SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
+            SiAuto.Main.LeaveMethod(this, "Planen");
+            //SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
         }
     }
 }
