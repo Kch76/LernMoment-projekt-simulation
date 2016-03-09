@@ -6,6 +6,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ProjektSimulation
@@ -38,7 +39,8 @@ namespace ProjektSimulation
         {
             foreach (Entwickler entwickler in aktuellesTeam)
             {
-                await entwickler.Arbeiten(aktuelleProjekte);
+                entwickler.Arbeiten(aktuelleProjekte);
+                await Task.Delay(TimeSpan.FromSeconds(10));
             }
         }
     }

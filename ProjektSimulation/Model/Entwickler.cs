@@ -13,10 +13,23 @@ namespace ProjektSimulation.Model
         Entwickeln
     }
 
-    public class Entwickler
+    public class Entwickler : NotifyPropertyChangeModelBase
     {
         public string Name { get; }
-        public Beschaeftigung AktuelleAufgabe { get; private set; }
+
+        private Beschaeftigung aktuelleAufgabe;
+        public Beschaeftigung AktuelleAufgabe
+        {
+            get { return aktuelleAufgabe; }
+            private set
+            {
+                if (value != aktuelleAufgabe)
+                {
+                    aktuelleAufgabe = value;
+                    RaisePropertyChanged("AktuelleAufgabe");
+                }
+            }
+        }
 
         public Entwickler(string name)
         {
@@ -44,6 +57,7 @@ namespace ProjektSimulation.Model
                 || (projekt.Status == ProjektStatus.Test))
             {
                 projekt.Status = ProjektStatus.Planung;
+                projekt.ZuletztAktiverEntwickler = Name;
                 AktuelleAufgabe = Beschaeftigung.Planen;
                 await Task.Delay(TimeSpan.FromSeconds(5));
                 AktuelleAufgabe = Beschaeftigung.Lernen;

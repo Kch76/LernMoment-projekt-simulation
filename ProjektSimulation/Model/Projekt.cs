@@ -15,16 +15,57 @@ namespace ProjektSimulation.Model
         Release
     }
 
-    public class Projekt
+    public class Projekt : NotifyPropertyChangeModelBase
     {
         public string Name { get; }
-        public ProjektStatus Status { get; set; }
-        public bool IstInBearbeitung { get; set; }
+
+        private ProjektStatus status;
+        public ProjektStatus Status
+        {
+            get { return status; }
+            set
+            {
+                if (value != status)
+                {
+                    status = value;
+                    RaisePropertyChanged("Status");
+                }
+            }
+        }
+
+        private bool istInBearbeitung;
+        public bool IstInBearbeitung
+        {
+            get { return istInBearbeitung; }
+            set
+            {
+                if (value != istInBearbeitung)
+                {
+                    istInBearbeitung = value;
+                    RaisePropertyChanged("IstInBearbeitung");
+                }
+            }
+        }
+
+        private string zuletztAktiverEntwickler;
+        public string ZuletztAktiverEntwickler
+        {
+            get { return zuletztAktiverEntwickler; }
+            set
+            {
+                if (value != zuletztAktiverEntwickler)
+                {
+                    zuletztAktiverEntwickler = value;
+                    RaisePropertyChanged("ZuletztAktiverEntwickler");
+                }
+            }
+        }
 
         public Projekt(string name)
         {
             Name = name;
             Status = ProjektStatus.Definition;
+            ZuletztAktiverEntwickler = "Niemand";
         }
 
     }
