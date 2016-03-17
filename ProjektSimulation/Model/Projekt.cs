@@ -23,7 +23,7 @@ namespace ProjektSimulation.Model
         public ProjektStatus Status
         {
             get { return status; }
-            set
+            private set
             {
                 if (value != status)
                 {
@@ -51,7 +51,7 @@ namespace ProjektSimulation.Model
         public string ZuletztAktiverEntwickler
         {
             get { return zuletztAktiverEntwickler; }
-            set
+            private set
             {
                 if (value != zuletztAktiverEntwickler)
                 {
@@ -68,5 +68,31 @@ namespace ProjektSimulation.Model
             ZuletztAktiverEntwickler = "Niemand";
         }
 
+        public async Task Planen(string nameDesEntwicklers)
+        {
+            ZuletztAktiverEntwickler = nameDesEntwicklers;
+
+            switch (Status)
+            {
+                case ProjektStatus.Definition:
+                    // Projekt ist erst definiert und braucht die initiale Planung.
+                    // Das dauert etwas länger ;-)!
+                    await Task.Delay(TimeSpan.FromSeconds(10));
+                    break;
+                case ProjektStatus.Test:
+                    // Nach dem Test kommt die nächste Iteration. Diese muss auch
+                    // geplant werden, aber das dauert jetzt nicht mehr so lange.
+                    await Task.Delay(TimeSpan.FromSeconds(5));
+                    break;
+                case ProjektStatus.Planung:
+                case ProjektStatus.Entwicklung:
+                case ProjektStatus.Release:
+                default:
+                    string message = String.Format("Ein Projekt kann nicht im Status {0} geplant werden!", Status);
+                    throw new InvalidOperationException(message);
+            }
+
+            return;
+        }
     }
 }
