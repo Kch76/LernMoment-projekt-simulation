@@ -86,17 +86,9 @@ namespace ProjektSimulation.Model
             //SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
             SiAuto.Main.EnterMethod(this, "Entwickeln - "+Name);
 
-            if (projekt.Status == ProjektStatus.Planung)
-            {
-                projekt.Status = ProjektStatus.Entwicklung;
-                AktuelleAufgabe = Beschaeftigung.Entwickeln;
-                projekt.ZuletztAktiverEntwickler = Name;
-
-                await Task.Delay(TimeSpan.FromSeconds(15));
-
-                SiAuto.Main.LogObject("Entwickler " + Name + " hat das folgende Projekt entwickelt", projekt);
-                AktuelleAufgabe = Beschaeftigung.Lernen;
-            }
+            AktuelleAufgabe = Beschaeftigung.Entwickeln;
+            await projekt.Entwickeln(Name);
+            AktuelleAufgabe = Beschaeftigung.Lernen;
 
             SiAuto.Main.LeaveMethod(this, "Entwickeln - "+Name);
             //SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");

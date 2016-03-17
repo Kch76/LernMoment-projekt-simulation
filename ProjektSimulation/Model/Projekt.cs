@@ -77,11 +77,13 @@ namespace ProjektSimulation.Model
                 case ProjektStatus.Definition:
                     // Projekt ist erst definiert und braucht die initiale Planung.
                     // Das dauert etwas länger ;-)!
+                    Status = ProjektStatus.Planung;
                     await Task.Delay(TimeSpan.FromSeconds(10));
                     break;
                 case ProjektStatus.Test:
                     // Nach dem Test kommt die nächste Iteration. Diese muss auch
                     // geplant werden, aber das dauert jetzt nicht mehr so lange.
+                    Status = ProjektStatus.Planung;
                     await Task.Delay(TimeSpan.FromSeconds(5));
                     break;
                 case ProjektStatus.Planung:
@@ -89,6 +91,29 @@ namespace ProjektSimulation.Model
                 case ProjektStatus.Release:
                 default:
                     string message = String.Format("Ein Projekt kann nicht im Status {0} geplant werden!", Status);
+                    throw new InvalidOperationException(message);
+            }
+
+            return;
+        }
+
+        public async Task Entwickeln(string nameDesEntwicklers)
+        {
+            ZuletztAktiverEntwickler = nameDesEntwicklers;
+
+            switch (Status)
+            {
+                case ProjektStatus.Planung:
+                    // Nach der Planung kommt die Entwicklung. Das dauert schon etwas länger
+                    Status = ProjektStatus.Entwicklung;
+                    await Task.Delay(TimeSpan.FromSeconds(10));
+                    break;
+                case ProjektStatus.Definition:
+                case ProjektStatus.Entwicklung:
+                case ProjektStatus.Test:
+                case ProjektStatus.Release:
+                default:
+                    string message = String.Format("Projekt hat Status: {0}. Es muss erst geplant werden!", Status);
                     throw new InvalidOperationException(message);
             }
 
