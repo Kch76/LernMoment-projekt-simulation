@@ -49,5 +49,13 @@ namespace ProjektSimulation
             SiAuto.Main.LeaveMethod(this, "btnStart_Click");
             //SiAuto.Main.LeaveThread("btnStart_Click");
         }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            foreach (Entwickler entwickler in aktuellesTeam)
+            {
+                entwickler.IstErschoepft = true;
+            }
+        }
     }
 }

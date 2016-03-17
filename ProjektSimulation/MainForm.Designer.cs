@@ -36,6 +36,7 @@
             this.tabProjekte = new Telerik.WinControls.UI.RadPageViewPage();
             this.gridProjekte = new Telerik.WinControls.UI.RadGridView();
             this.btnStart = new Telerik.WinControls.UI.RadButton();
+            this.btnStop = new Telerik.WinControls.UI.RadButton();
             ((System.ComponentModel.ISupportInitialize)(this.tabControl)).BeginInit();
             this.tabControl.SuspendLayout();
             this.tabEntwickler.SuspendLayout();
@@ -45,6 +46,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             this.SuspendLayout();
             // 
@@ -113,11 +115,21 @@
             this.btnStart.Text = "Start";
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
+            // btnStop
+            // 
+            this.btnStop.Location = new System.Drawing.Point(130, 13);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(110, 24);
+            this.btnStop.TabIndex = 2;
+            this.btnStop.Text = "Stopp";
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(826, 420);
+            this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.tabControl);
             this.Name = "MainForm";
@@ -135,6 +147,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte.MasterTemplate)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridProjekte)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.btnStart)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnStop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
             this.ResumeLayout(false);
 
@@ -148,5 +161,6 @@
         private Telerik.WinControls.UI.RadPageViewPage tabProjekte;
         private Telerik.WinControls.UI.RadGridView gridProjekte;
         private Telerik.WinControls.UI.RadButton btnStart;
+        private Telerik.WinControls.UI.RadButton btnStop;
     }
 }
