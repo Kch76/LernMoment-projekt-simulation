@@ -119,5 +119,28 @@ namespace ProjektSimulation.Model
 
             return;
         }
+
+        public async Task Testen(string nameDesEntwicklers)
+        {
+            ZuletztAktiverEntwickler = nameDesEntwicklers;
+
+            switch (Status)
+            {
+                case ProjektStatus.Entwicklung:
+                    // Nach der Entwicklung kommt der Test. Das richtig schnell
+                    Status = ProjektStatus.Test;
+                    await Task.Delay(TimeSpan.FromSeconds(2));
+                    break;
+                case ProjektStatus.Definition:
+                case ProjektStatus.Planung:
+                case ProjektStatus.Test:
+                case ProjektStatus.Release:
+                default:
+                    string message = String.Format("Projekt hat Status: {0}. Es muss erst entwickelt werden!", Status);
+                    throw new InvalidOperationException(message);
+            }
+
+            return;
+        }
     }
 }

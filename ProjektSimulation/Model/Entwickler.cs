@@ -11,7 +11,8 @@ namespace ProjektSimulation.Model
     {
         Lernen,
         Planen,
-        Entwickeln
+        Entwickeln,
+        Testen
     }
 
     public class Entwickler : NotifyPropertyChangeModelBase
@@ -63,6 +64,7 @@ namespace ProjektSimulation.Model
                 aktuellesProjekt = await dashboard.CheckoutZumBearbeitenAsync();
                 await Planen(aktuellesProjekt);
                 await Entwickeln(aktuellesProjekt);
+                await Testen(aktuellesProjekt);
                 dashboard.CheckinNachBearbeitung(aktuellesProjekt);
             }
             SiAuto.Main.LeaveThread("Entwickler.Arbeiten-Task - "+Name);
@@ -91,6 +93,19 @@ namespace ProjektSimulation.Model
             AktuelleAufgabe = Beschaeftigung.Lernen;
 
             SiAuto.Main.LeaveMethod(this, "Entwickeln - "+Name);
+            //SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
+        }
+
+        private async Task Testen(Projekt projekt)
+        {
+            //SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
+            SiAuto.Main.EnterMethod(this, "Testen - " + Name);
+
+            AktuelleAufgabe = Beschaeftigung.Testen;
+            await projekt.Testen(Name);
+            AktuelleAufgabe = Beschaeftigung.Lernen;
+
+            SiAuto.Main.LeaveMethod(this, "Testen - " + Name);
             //SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
         }
     }
