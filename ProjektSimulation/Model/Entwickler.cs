@@ -55,7 +55,7 @@ namespace ProjektSimulation.Model
 
         public async Task Arbeiten(IEnumerable<Projekt> projekte)
         {
-            SiAuto.Main.EnterThread("Entwickler.Arbeiten-Task");
+            SiAuto.Main.EnterThread("Entwickler.Arbeiten-Task - "+Name);
             while (!IstErschoepft)
             {
                 foreach (Projekt projekt in projekte)
@@ -69,13 +69,13 @@ namespace ProjektSimulation.Model
                     }
                 }
             }
-            SiAuto.Main.LeaveThread("Entwickler.Arbeiten-Task");
+            SiAuto.Main.LeaveThread("Entwickler.Arbeiten-Task - "+Name);
         }
 
         private async Task Planen(Projekt projekt)
         {
             //SiAuto.Main.EnterThread("Entwickler.Planen-Task");
-            SiAuto.Main.EnterMethod(this, "Planen");
+            SiAuto.Main.EnterMethod(this, "Planen - "+Name);
 
             if ((projekt.Status == ProjektStatus.Definition) 
                 || (projekt.Status == ProjektStatus.Test))
@@ -91,14 +91,14 @@ namespace ProjektSimulation.Model
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
-            SiAuto.Main.LeaveMethod(this, "Planen");
+            SiAuto.Main.LeaveMethod(this, "Planen - "+Name);
             //SiAuto.Main.LeaveThread("Entwickler.Planen-Task");
         }
 
         private async Task Entwickeln(Projekt projekt)
         {
             //SiAuto.Main.EnterThread("Entwickler.Entwickeln-Task");
-            SiAuto.Main.EnterMethod(this, "Entwickeln");
+            SiAuto.Main.EnterMethod(this, "Entwickeln - "+Name);
 
             if (projekt.Status == ProjektStatus.Planung)
             {
@@ -112,7 +112,7 @@ namespace ProjektSimulation.Model
                 AktuelleAufgabe = Beschaeftigung.Lernen;
             }
 
-            SiAuto.Main.LeaveMethod(this, "Planen");
+            SiAuto.Main.LeaveMethod(this, "Entwickeln - "+Name);
             //SiAuto.Main.LeaveThread("Entwickler.Entwickeln-Task");
         }
     }
