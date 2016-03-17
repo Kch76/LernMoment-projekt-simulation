@@ -53,21 +53,17 @@ namespace ProjektSimulation.Model
             IstErschoepft = false;
         }
 
-        public async Task Arbeiten(IEnumerable<Projekt> projekte)
+        public async Task Arbeiten(ProjektDashboard dashboard)
         {
             SiAuto.Main.EnterThread("Entwickler.Arbeiten-Task - "+Name);
+            Projekt aktuellesProjekt;
+
             while (!IstErschoepft)
             {
-                foreach (Projekt projekt in projekte)
-                {
-                    if (!projekt.IstInBearbeitung)
-                    {
-                        projekt.IstInBearbeitung = true;
-                        await Planen(projekt);
-                        await Entwickeln(projekt);
-                        projekt.IstInBearbeitung = false;
-                    }
-                }
+                aktuellesProjekt = await dashboard.CheckoutZumBearbeitenAsync();
+                await Planen(aktuellesProjekt);
+                await Entwickeln(aktuellesProjekt);
+                dashboard.CheckinNachBearbeitung(aktuellesProjekt);
             }
             SiAuto.Main.LeaveThread("Entwickler.Arbeiten-Task - "+Name);
         }

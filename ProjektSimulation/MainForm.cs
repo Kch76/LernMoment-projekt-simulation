@@ -15,14 +15,14 @@ namespace ProjektSimulation
     public partial class MainForm : Telerik.WinControls.UI.RadForm
     {
         private BindingList<Entwickler> aktuellesTeam;
-        private BindingList<Projekt> aktuelleProjekte;
+        private ProjektDashboard dashboard;
 
         public MainForm()
         {
             InitializeComponent();
 
             aktuellesTeam = new BindingList<Entwickler>(EntwicklerPool.HoleEntwicklerTeam());
-            aktuelleProjekte = new BindingList<Projekt>(ProjektPortfolio.HoleAktuelleProjekte());
+            dashboard = new ProjektDashboard(ProjektPortfolio.HoleAktuelleProjekte());
         }
 
         protected override void OnLoad(EventArgs e)
@@ -33,7 +33,7 @@ namespace ProjektSimulation
             this.gridEntwickler.DataSource = aktuellesTeam;
 
             this.gridProjekte.BestFitColumns();
-            this.gridProjekte.DataSource = aktuelleProjekte;
+            this.gridProjekte.DataSource = dashboard.ProjektListe;
         }
 
         private async void btnStart_Click(object sender, EventArgs e)
@@ -43,7 +43,7 @@ namespace ProjektSimulation
             foreach (Entwickler entwickler in aktuellesTeam)
             {
                 SiAuto.Main.LogMessage("Schicke Entwickler: {0} an die Arbeit!", entwickler.Name);
-                entwickler.Arbeiten(aktuelleProjekte);
+                entwickler.Arbeiten(dashboard);
                 await Task.Delay(TimeSpan.FromSeconds(10));
             }
             SiAuto.Main.LeaveMethod(this, "btnStart_Click");
