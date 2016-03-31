@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProjektSimulation.Model
@@ -54,12 +55,12 @@ namespace ProjektSimulation.Model
             IstErschoepft = false;
         }
 
-        public async Task Arbeiten(ProjektDashboard dashboard)
+        public async Task Arbeiten(ProjektDashboard dashboard, CancellationToken ct)
         {
             SiAuto.Main.EnterThread("Entwickler.Arbeiten-Task - "+Name);
             Projekt aktuellesProjekt;
 
-            while (!IstErschoepft)
+            while (!IstErschoepft && !ct.IsCancellationRequested)
             {
                 aktuellesProjekt = await dashboard.CheckoutZumBearbeitenAsync();
                 await Planen(aktuellesProjekt);

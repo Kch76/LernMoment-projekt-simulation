@@ -1,14 +1,9 @@
 ﻿using Gurock.SmartInspect;
 using ProjektSimulation.Model;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace ProjektSimulation
 {
@@ -16,6 +11,7 @@ namespace ProjektSimulation
     {
         private BindingList<Entwickler> aktuellesTeam;
         private ProjektDashboard dashboard;
+        private CancellationTokenSource cts;
 
         public MainForm()
         {
@@ -40,10 +36,14 @@ namespace ProjektSimulation
         {
             //SiAuto.Main.EnterThread("btnStart_Click");
             SiAuto.Main.EnterMethod(this, "btnStart_Click");
+
+            // später wollen wir die laufdenen Tasks beenden lassen.
+            cts = new CancellationTokenSource();
+
             foreach (Entwickler entwickler in aktuellesTeam)
             {
                 SiAuto.Main.LogMessage("Schicke Entwickler: {0} an die Arbeit!", entwickler.Name);
-                entwickler.Arbeiten(dashboard);
+                entwickler.Arbeiten(dashboard, cts.Token);
                 await Task.Delay(TimeSpan.FromSeconds(10));
             }
             SiAuto.Main.LeaveMethod(this, "btnStart_Click");
@@ -52,10 +52,19 @@ namespace ProjektSimulation
 
         private void btnStop_Click(object sender, EventArgs e)
         {
+            // Die laufenden Tasks beenden
+            if (cts != null)
+            {
+                cts.Cancel();
+            }
+
+            // Alle Entwickler zum Ausruhen schicken
             foreach (Entwickler entwickler in aktuellesTeam)
             {
                 entwickler.IstErschoepft = true;
             }
+
+            
         }
     }
 }
