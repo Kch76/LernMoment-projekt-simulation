@@ -12,7 +12,8 @@ namespace ProjektSimulation
         [STAThread]
         static void Main()
         {
-            SiAuto.Si.Enabled = true;
+            //SiAuto.Si.Enabled = true;
+            SiAuto.Si.LoadConfiguration("LoggingConfig\\ProjektSimulation-Debug-LogConfig.sic");
             SiAuto.Main.EnterProcess("ProjektSimulation");
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
