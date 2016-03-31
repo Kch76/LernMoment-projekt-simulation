@@ -19,6 +19,8 @@ namespace ProjektSimulation
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
             SiAuto.Main.LeaveProcess("ProjektSimulation");
+            SiAuto.Main.LogError("Flush Backlog!");
+            SiAuto.Si.Dispose();
         }
     }
 }
