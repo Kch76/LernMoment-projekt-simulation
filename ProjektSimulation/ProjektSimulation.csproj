@@ -94,6 +94,9 @@
     <None Include="LoggingConfig\ProjektSimulation-Debug-LogConfig.sic">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="LoggingConfig\ProjektSimulation-Release-LogConfig.sic">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

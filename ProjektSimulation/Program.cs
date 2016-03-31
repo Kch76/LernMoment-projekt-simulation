@@ -6,8 +6,9 @@ namespace ProjektSimulation
 {
     static class Program
     {
-        private const string configurationFileName = "LoggingConfig\\ProjektSimulation-Debug-LogConfig.sic";
-        
+        private const string debugConfigurationFileName = "LoggingConfig\\ProjektSimulation-Debug-LogConfig.sic";
+        private const string releaseConfigurationFileName = "LoggingConfig\\ProjektSimulation-Release-LogConfig.sic";
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -15,8 +16,13 @@ namespace ProjektSimulation
         static void Main()
         {
             // Logging mit SmartInspect vorbereiten
-            SiAuto.Si.LoadConfiguration(configurationFileName);
-            var timer = new ConfigurationTimer(SiAuto.Si, configurationFileName, 60000);
+#if DEBUG
+            SiAuto.Si.LoadConfiguration(debugConfigurationFileName);
+            var timer = new ConfigurationTimer(SiAuto.Si, debugConfigurationFileName, 60000);
+#else
+            SiAuto.Si.LoadConfiguration(releaseConfigurationFileName);
+            var timer = new ConfigurationTimer(SiAuto.Si, releaseConfigurationFileName, 60000);
+#endif
 
             // Das eigentliche Ausführen der Anwendung
             SiAuto.Main.EnterProcess("ProjektSimulation");

@@ -1,0 +1,3 @@
+﻿AppName = ProjektSimulation-Release
+Connections = file(append="true", buffer="10", async.enabled="true")
+Enabled = True
